@@ -2806,19 +2806,15 @@ mkdirp@0.x, mkdirp@^0.5.0, mkdirp@^0.5.1:
   dependencies:
     minimist "0.0.8"
 
-monaco-editor-core@0.15.5:
-  version "0.15.5"
-  resolved "https://registry.yarnpkg.com/monaco-editor-core/-/monaco-editor-core-0.15.5.tgz#145f1953a8e319282d92502252d68ef3486b6875"
-  integrity sha512-kM3KHRjj16cFdK5Z0EppKUu793JVMpsEesBSWlqdgrxcmjyDMXV6xK0oatPcAYp3eOfbbyjPhruxDXj85FKyIg==
-
-monaco-languages@1.6.0:
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/monaco-languages/-/monaco-languages-1.6.0.tgz#54ec5510b31f3132939014f171ade235e84ef0bc"
-  integrity sha512-LBEWj8tngYwsq4kasQr+dIhnO4xUIEN36ns+cRepWAQiXZnzcrZ84gFHXm8f4mR4tssxvHVU5Vw7xMUYro6h3g==
+monaco-editor@0.16.2:
+  version "0.16.2"
+  resolved "http://registry.npm.taobao.org/monaco-editor/download/monaco-editor-0.16.2.tgz#950084ed82eeaef1c8c9d3c1bcab849fe11b2415"
+  integrity sha1-lQCE7YLurvHIydPBvKuEn+EbJBU=
 
 monaco-plugin-helpers@^1.0.2:
   version "1.0.2"
-  resolved "https://registry.yarnpkg.com/monaco-plugin-helpers/-/monaco-plugin-helpers-1.0.2.tgz#ee1af42503fe4669f3a8731112b661032e41c8a9"
+  resolved "http://registry.npm.taobao.org/monaco-plugin-helpers/download/monaco-plugin-helpers-1.0.2.tgz#ee1af42503fe4669f3a8731112b661032e41c8a9"
+  integrity sha1-7hr0JQP+RmnzqHMRErZhAy5ByKk=
   dependencies:
     typescript "^2.7.2"
 
@@ -4112,7 +4108,8 @@ type-check@~0.3.2:
 
 typescript@^2.7.2:
   version "2.9.2"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.9.2.tgz#1cbf61d05d6b96269244eb6a3bce4bd914e0f00c"
+  resolved "http://registry.npm.taobao.org/typescript/download/typescript-2.9.2.tgz#1cbf61d05d6b96269244eb6a3bce4bd914e0f00c"
+  integrity sha1-HL9h0F1rliaSROtqO85L2RTg8Aw=
 
 typescript@^3.1.6:
   version "3.1.6"

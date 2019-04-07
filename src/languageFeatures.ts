@@ -325,6 +325,7 @@ export class CompletionAdapter
               documentation: entry.documentation,
               detail: entry.detail,
               kind: toCompletionItemKind(entry.kind),
+              range: null,
             };
             if (entry.textEdit) {
               item.range = toRange(entry.textEdit.range);

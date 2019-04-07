@@ -6,7 +6,7 @@
  *--------------------------------------------------------------------------------------------*/
 'use strict';
 
-import Promise = monaco.Promise;
+//  import Promise = monaco.Promise;
 import Thenable = monaco.Thenable;
 import IWorkerContext = monaco.worker.IWorkerContext;
 
@@ -48,7 +48,7 @@ export class YAMLWorker {
       const yamlDocument = this._languageService.parseYAMLDocument(document);
       return this._languageService.doValidation(document, yamlDocument);
     }
-    return Promise.as([]);
+    return Promise.resolve([]);
   }
   public doComplete(
     uri: string,
@@ -73,10 +73,10 @@ export class YAMLWorker {
   ): Thenable<ls.TextEdit[]> {
     const document = this._getTextDocument(uri);
     const textEdits = this._languageService.doFormat(document, options, []);
-    return Promise.as(textEdits);
+    return Promise.resolve(textEdits);
   }
   public resetSchema(uri: string): Thenable<boolean> {
-    return Promise.as(this._languageService.resetSchema(uri));
+    return Promise.resolve(this._languageService.resetSchema(uri));
   }
   public findDocumentSymbols(uri: string): Thenable<ls.DocumentSymbol[]> {
     const document = this._getTextDocument(uri);
@@ -85,7 +85,7 @@ export class YAMLWorker {
       document,
       yamlDocument
     );
-    return Promise.as(symbols);
+    return Promise.resolve(symbols);
   }
   public findDocumentColors(uri: string): Thenable<ls.ColorInformation[]> {
     const document = this._getTextDocument(uri);
@@ -94,7 +94,7 @@ export class YAMLWorker {
       document,
       stylesheet
     );
-    return Promise.as(colorSymbols);
+    return Promise.resolve(colorSymbols);
   }
   public getColorPresentations(
     uri: string,
@@ -109,7 +109,7 @@ export class YAMLWorker {
       color,
       range
     );
-    return Promise.as(colorPresentations);
+    return Promise.resolve(colorPresentations);
   }
   private _getTextDocument(uri: string): ls.TextDocument {
     const models = this._ctx.getMirrorModels();

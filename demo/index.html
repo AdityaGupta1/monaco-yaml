@@ -6,7 +6,7 @@
     <link
       rel="stylesheet"
       data-name="vs/editor/editor.main"
-      href="../node_modules/monaco-editor-core/dev/vs/editor/editor.main.css"
+      href="../node_modules/monaco-editor/dev/vs/editor/editor.main.css"
     />
   </head>
 
@@ -27,9 +27,8 @@
     <script>
       // Loading basic-languages to get the YAML language definition
       var paths = {
-        'vs/basic-languages': '../node_modules/monaco-languages/release/dev',
         'vs/language/yaml': '../release/dev',
-        vs: '../node_modules/monaco-editor-core/dev/vs',
+        vs: '../node_modules/monaco-editor/dev/vs',
       };
       if (document.location.protocol === 'http:') {
         // Add support for running local http server
@@ -43,16 +42,62 @@
         paths: paths,
       };
     </script>
-    <script src="../node_modules/monaco-editor-core/dev/vs/loader.js"></script>
-    <script src="../node_modules/monaco-editor-core/dev/vs/editor/editor.main.nls.js"></script>
-    <script src="../node_modules/monaco-editor-core/dev/vs/editor/editor.main.js"></script>
+    <script src="../node_modules/monaco-editor/dev/vs/loader.js"></script>
+    <script src="../node_modules/monaco-editor/dev/vs/editor/editor.main.nls.js"></script>
+    <script src="../node_modules/monaco-editor/dev/vs/editor/editor.main.js"></script>
 
     <script>
       require([
         'vs/basic-languages/monaco.contribution',
         'vs/language/yaml/monaco.contribution',
       ], function() {
-        const yaml = `p1: `;
+        const yaml = `apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qa-jiapin-cicdtest
+  namespace: qa
+  labels:
+    app: qa-jiapin-cicdtest
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: qa-jiapin-cicdtest
+  template:
+    metadata:
+      labels:
+        app: qa-jiapin-cicdtest
+      annotations:
+        prometheus.io/scrape: 'true'
+        prometheus.io/port: '8080'
+    spec:
+      containers:
+        - name: qa-jiapin-cicdtest
+          image: registry-vpc.cn-hangzhou.aliyuncs.com/jiapin-qa/docker-jiapin-cicdtest:ver_000
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 10
+            timeoutSeconds: 5
+          env:
+            - name: environ
+              value: "qa"
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: "200Mi"
+              cpu: "10m"
+            limits:
+              memory: "500Mi"
+              cpu: "400m"
+          ports:
+            - containerPort: 80
+            - containerPort: 443
+            - containerPort: 8080
+      imagePullSecrets:
+        - name: docker-aliyun-secret`;
         const modelUri = monaco.Uri.parse('a://b/foo.json');
         const editor = monaco.editor.create(
           document.getElementById('container'),
@@ -68,30 +113,9 @@
           validate: true,
           schemas: [
             {
-              uri: 'http://myserver/foo-schema.json', // id of the first schema
-              fileMatch: [modelUri.toString()], // associate with our model
-              schema: {
-                type: 'object',
-                properties: {
-                  p1: {
-                    enum: ['v1', 'v2'],
-                  },
-                  p2: {
-                    $ref: 'http://myserver/bar-schema.json', // reference the second schema
-                  },
-                },
-              },
-            },
-            {
-              uri: 'http://myserver/bar-schema.json', // id of the first schema
-              schema: {
-                type: 'object',
-                properties: {
-                  q1: {
-                    enum: ['x1', 'x2'],
-                  },
-                },
-              },
+              uri:
+                'https://raw.githubusercontent.com/garethr/kubernetes-json-schema/master/master/deployment.json', // id of the first schema
+              fileMatch: [modelUri.toString()],
             },
           ],
         });
@@ -125,7 +149,9 @@
               return target;
             }
 
-            return _recur({ children: symbols });
+            return _recur({
+              children: symbols,
+            });
           }
 
           editor.onDidChangeCursorSelection(async ({ selection }) => {

@@ -7,7 +7,7 @@
 import { LanguageServiceDefaultsImpl } from './monaco.contribution';
 import { YAMLWorker } from './yamlWorker';
 
-import Promise = monaco.Promise;
+// import Promise = monaco.Promise;
 import IDisposable = monaco.IDisposable;
 import Uri = monaco.Uri;
 
