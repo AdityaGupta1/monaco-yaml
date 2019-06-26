@@ -5,7 +5,7 @@
   "scripts": {
     "compile": "rimraf ./out && tsc -p ./src/tsconfig.json",
     "watch": "tsc -p ./src --watch",
-    "prepublish": "rimraf ./out && rimraf ./release && yarn compile:umd && node ./scripts/bundle && mcopy ./src/monaco.d.ts ./release/monaco.d.ts",
+    "prepublish": "rimraf ./out && rimraf ./release && yarn compile && node ./scripts/bundle && mcopy ./src/monaco.d.ts ./release/monaco.d.ts",
     "lint": "prettier \"{src,test}/**/*.{json,scss,html,ts}\" --write",
     "test": "jest --verbose"
   },
@@ -22,6 +22,7 @@
   "bugs": {
     "url": "https://github.com/pengx17/monaco-yaml/issues"
   },
+  "typings": "./src/typings/refs.d.ts",
   "devDependencies": {
     "@types/jest": "^23.3.10",
     "@types/node": "^10.9.3",
